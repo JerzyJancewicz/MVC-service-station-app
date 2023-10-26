@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ServiceStation.Domain",
+    "\\ServiceStation.Domain\\Entities",
+    "\\ServiceStation.Domain\\Entities\\Services",
+    "\\ServiceStation.Infrastructure",
+    "\\ServiceStation.Infrastructure\\Presistance",
+    "\\ServiceStation.MVC",
+    "\\ServiceStation.MVC\\Models"
+  ],
+  "SelectedNode": "\\ServiceStation.Infrastructure\\Presistance\\ServiceStationDbContext.cs",
+  "PreviewInSolutionExplorer": false
+}

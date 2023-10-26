@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using ServiceStation.Infrastructure.Presistance;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Dodanie dbcontextu do pojemnika dependency Injection i dodanie do parametru connectionString ktory znajduje sie w pliku json
+builder.Services.AddDbContext<ServiceStationDbContext>(options => options.UseSqlServer(
+    builder.Configuration.GetConnectionString("Default")));
+
 
 var app = builder.Build();
 
