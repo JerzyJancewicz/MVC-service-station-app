@@ -12,7 +12,7 @@ using ServiceStation.Infrastructure.Presistance;
 namespace ServiceStation.Infrastructure.Migrations
 {
     [DbContext(typeof(ServiceStationDbContext))]
-    [Migration("20231025140759_Init")]
+    [Migration("20231027134635_Init")]
     partial class Init
     {
         /// <inheritdoc />
