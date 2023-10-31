@@ -36,6 +36,8 @@ public class HomeController : Controller
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
+        // Activity.Current?.Id menas that can be nullable
+        // Activity.Current!.Id null-forgiving operator. Means that I'am shoure that this value is not returning null
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
