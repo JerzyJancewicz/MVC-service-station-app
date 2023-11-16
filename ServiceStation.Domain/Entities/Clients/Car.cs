@@ -14,5 +14,7 @@ namespace ServiceStation.Domain.Entities.Clients
         public int IdClient { get; set; }
         public virtual Client IdClientNavigation { get; set; } = null!;
         public virtual ICollection<Service> Services { get; set; } = new List<Service>();
+
+        public void EncodeLicensePlate() => LicensePlate = LicensePlate.ToUpper().Replace(" ", "");
     }
 }

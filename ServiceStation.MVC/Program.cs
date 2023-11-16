@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ServiceStation.Infrastructure.Presistance;
 using ServiceStation.Infrastructure.Extensions;
+using ServiceStation.Application.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddDbContext<ServiceStationDbContext>(options => options.UseSql
     builder.Configuration.GetConnectionString("Default")));*/
 
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
 
 var app = builder.Build();
 

@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ServiceStation.Domain.Interfaces;
 using ServiceStation.Infrastructure.Presistance;
+using ServiceStation.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,8 @@ namespace ServiceStation.Infrastructure.Extensions
             // Dodanie dbcontextu do pojemnika dependency Injection i dodanie do parametru connectionString ktory znajduje sie w pliku json
             services.AddDbContext<ServiceStationDbContext>(options => options.UseSqlServer(
                 configuration.GetConnectionString("Default")));
+
+            services.AddScoped<IServiceStationRepository, ServiceStationRepository>();
         }
     }
 }
