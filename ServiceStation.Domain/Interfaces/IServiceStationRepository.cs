@@ -9,6 +9,6 @@ namespace ServiceStation.Domain.Interfaces
 {
     public interface IServiceStationRepository
     {
-        Task Create(CarDto car);
+        Task Create(Car car);
     }
 }
