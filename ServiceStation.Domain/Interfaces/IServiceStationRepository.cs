@@ -10,5 +10,7 @@ namespace ServiceStation.Domain.Interfaces
     public interface IServiceStationRepository
     {
         Task Create(Car car);
+        Task<Car?> GetByName(string name);
+        Task<IEnumerable<Car>> GetAll();
     }
 }

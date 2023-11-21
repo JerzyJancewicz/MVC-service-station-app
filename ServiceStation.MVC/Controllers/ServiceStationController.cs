@@ -14,6 +14,13 @@ namespace ServiceStation.MVC.Controllers
             this.serviceStationService = serviceStationService;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            var cars = await serviceStationService.GetAll();
+
+            return View(cars);
+        }
+
         public IActionResult Create() 
         {
             return View();
@@ -22,6 +29,10 @@ namespace ServiceStation.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CarDto car) 
         {
+            if (!ModelState.IsValid) 
+            {
+                return View();
+            }
             await serviceStationService.Create(car);
             return RedirectToAction(nameof(Create));
         }

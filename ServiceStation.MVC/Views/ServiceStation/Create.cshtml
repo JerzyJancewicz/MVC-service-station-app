@@ -1,4 +1,6 @@
-﻿
+﻿@using ServiceStation.Application.ServiceStation;
+@model CarDto
+
 <h1>Create Car</h1>
 
 <hr/>
@@ -8,11 +10,13 @@
         <form action="/ServiceStation/Create" method="post">
             <div class="form-group mb-3">
                 <label class="control-label" for="LicensePlate">LicensePlate</label>
-                <input class="form-control" type="text" id="LicensePlate" name="LicensePlate">
+                <input class="form-control" type="text" asp-for="LicensePlate">
+                <span asp-validation-for="LicensePlate" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
                 <label class="control-label" for="Name">Name</label>
-                <input class="form-control" type="text" id="Name" name="Name">
+                <input class="form-control" type="text" asp-for="Name">
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
                 <label class="control-label" for="IdClient">IdClient</label>
@@ -24,3 +28,9 @@
         </form>
     </div>
 </div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

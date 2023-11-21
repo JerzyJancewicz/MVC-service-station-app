@@ -1,6 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.Extensions.DependencyInjection;
 using ServiceStation.Application.Mappings;
 using ServiceStation.Application.Services;
+using ServiceStation.Application.ServiceStation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +19,10 @@ namespace ServiceStation.Application.Extensions
             services.AddScoped<IServiceStationService, ServiceStationService>();
 
             services.AddAutoMapper(typeof(ServiceStationMappingProfile));
+
+            services.AddValidatorsFromAssemblyContaining<CarValidator>()
+                .AddFluentValidationAutoValidation()
+                .AddFluentValidationClientsideAdapters();
         }
 
     }

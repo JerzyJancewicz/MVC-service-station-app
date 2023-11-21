@@ -6,5 +6,7 @@ namespace ServiceStation.Application.Services
     public interface IServiceStationService
     {
         Task Create(CarDto car);
+        Task<IEnumerable<CarDto>> GetAll();
+
     }
 }

@@ -20,6 +20,7 @@ namespace ServiceStation.Application.Mappings
         public ServiceStationMappingProfile()
         {
             CreateMap<CarDto, Car>();
+            CreateMap<Car, CarDto>();
         }
     }
 }

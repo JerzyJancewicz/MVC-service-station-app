@@ -29,5 +29,13 @@ namespace ServiceStation.Application.Services
             car.EncodeLicensePlate();
             await serviceStationRepository.Create(car);
         }
+
+        public async Task<IEnumerable<CarDto>> GetAll()
+        {
+            var cars = await serviceStationRepository.GetAll();
+            var dtos = mapper.Map<IEnumerable<CarDto>>(cars);
+
+            return dtos;
+        }
     }
 }
