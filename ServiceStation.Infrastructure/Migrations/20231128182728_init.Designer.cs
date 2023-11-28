@@ -12,8 +12,8 @@ using ServiceStation.Infrastructure.Presistance;
 namespace ServiceStation.Infrastructure.Migrations
 {
     [DbContext(typeof(ServiceStationDbContext))]
-    [Migration("20231027134635_Init")]
-    partial class Init
+    [Migration("20231128182728_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

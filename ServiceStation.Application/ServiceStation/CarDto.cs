@@ -11,7 +11,7 @@ namespace ServiceStation.Application.ServiceStation
     {
         public string LicensePlate { get; set; } = default!;
         public string Name { get; set; } = default!;
-        
+        public int IdClient { get; set; }
 
     }
 }

@@ -1,22 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ServiceStation.Application.Services;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using ServiceStation.Application.ServiceStation;
+using ServiceStation.Application.ServiceStation.Commands.CreateCar;
+using ServiceStation.Application.ServiceStation.Queries.GetAllCar;
+using ServiceStation.Application.ServiceStation.Queries.GetCarByLicansePlate;
 using ServiceStation.Domain.Entities.Clients;
 
 namespace ServiceStation.MVC.Controllers
 {
     public class ServiceStationController : Controller
     {
-        private readonly IServiceStationService serviceStationService;
+        private readonly IMediator _mediator;
 
-        public ServiceStationController(IServiceStationService serviceStationService)
+        public ServiceStationController(IMediator mediator)
         {
-            this.serviceStationService = serviceStationService;
+            _mediator = mediator;
         }
 
         public async Task<IActionResult> Index()
         {
-            var cars = await serviceStationService.GetAll();
+            var cars = await _mediator.Send(new GetAllCarQuery());
 
             return View(cars);
         }
@@ -26,15 +29,22 @@ namespace ServiceStation.MVC.Controllers
             return View();
         }
 
+        [Route("Car/{LicensePlate}/Details")]
+        public async Task<IActionResult> Details(string LicensePlate)
+        {
+            var carDto = await _mediator.Send(new GetCarByLicensePlateQuery(LicensePlate));
+            return View(carDto);
+        }
+
         [HttpPost]
-        public async Task<IActionResult> Create(CarDto car) 
+        public async Task<IActionResult> Create(CreateCarCommand command) 
         {
             if (!ModelState.IsValid) 
             {
-                return View();
+                return View(command);
             }
-            await serviceStationService.Create(car);
-            return RedirectToAction(nameof(Create));
+            await _mediator.Send(command);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

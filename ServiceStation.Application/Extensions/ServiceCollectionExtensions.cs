@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceStation.Application.Mappings;
-using ServiceStation.Application.Services;
-using ServiceStation.Application.ServiceStation;
+using ServiceStation.Application.ServiceStation.Commands.CreateCar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +16,11 @@ namespace ServiceStation.Application.Extensions
     {
         public static void AddApplication(this IServiceCollection services) 
         {
-            services.AddScoped<IServiceStationService, ServiceStationService>();
+            services.AddMediatR(typeof(CreateCarCommand));
 
             services.AddAutoMapper(typeof(ServiceStationMappingProfile));
 
-            services.AddValidatorsFromAssemblyContaining<CarValidator>()
+            services.AddValidatorsFromAssemblyContaining<CreateCarCommandValidator>()
                 .AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters();
         }

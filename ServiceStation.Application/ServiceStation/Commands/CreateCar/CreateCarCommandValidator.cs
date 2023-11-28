@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServiceStation.Application.ServiceStation
+namespace ServiceStation.Application.ServiceStation.Commands.CreateCar
 {
-    public class CarValidator : AbstractValidator<CarDto>
+    public class CreateCarCommandValidator : AbstractValidator<CreateCarCommand>
     {
-        public CarValidator(IServiceStationRepository repository)
+        public CreateCarCommandValidator(IServiceStationRepository repository)
         {
             RuleFor(c => c.LicensePlate)
                 .NotEmpty()
@@ -26,8 +26,8 @@ namespace ServiceStation.Application.ServiceStation
                 });
             RuleFor(c => c.Name)
                 .NotEmpty()
-                .MinimumLength(20);
-           
+                .MaximumLength(20);
+
         }
     }
 }
