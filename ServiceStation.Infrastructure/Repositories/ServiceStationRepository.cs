@@ -24,6 +24,16 @@ namespace ServiceStation.Infrastructure.Repositories
             await _serviceStationDbContext.SaveChangesAsync();
         }
 
+        public async Task DeleteCar(string LicensePlate)
+        {
+            var car = await _serviceStationDbContext.car.FirstOrDefaultAsync(e => e.LicensePlate == LicensePlate);
+            if (car != null)
+            {
+                _serviceStationDbContext.car.Remove(car);
+                await _serviceStationDbContext.SaveChangesAsync();
+            }
+        }
+
         public async Task<IEnumerable<Car>> GetAll()
         {
             return await _serviceStationDbContext.car.ToListAsync();
@@ -32,6 +42,22 @@ namespace ServiceStation.Infrastructure.Repositories
         public async Task<Car?> GetByName(string name)
         {
             return await _serviceStationDbContext.car.FirstOrDefaultAsync(e => e.LicensePlate.ToLower() == name.ToLower());
+        }
+
+        public async Task<Client?> GetClientById(int Id)
+        {
+            return await _serviceStationDbContext.client.FirstOrDefaultAsync(e => e.Id == Id);
+        }
+
+        public async Task Update(Car car)
+        {
+            var carToUpdate = await _serviceStationDbContext.car.FirstOrDefaultAsync(e => e.LicensePlate.ToLower() == car.LicensePlate.ToLower());
+            if (carToUpdate != null)
+            {
+                carToUpdate.CarName = car.CarName;
+                carToUpdate.IdClient = car.IdClient;
+                await _serviceStationDbContext.SaveChangesAsync();
+            }
         }
     }
 }

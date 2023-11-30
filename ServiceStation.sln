@@ -5,11 +5,11 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceStation.MVC", "ServiceStation.MVC\ServiceStation.MVC.csproj", "{89E8E413-1346-4D72-B7A8-58D3F349947F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStation.Domain", "ServiceStation.Domain\ServiceStation.Domain.csproj", "{A39AF891-04F9-4293-BCB1-1EC4920D7C66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceStation.Domain", "ServiceStation.Domain\ServiceStation.Domain.csproj", "{A39AF891-04F9-4293-BCB1-1EC4920D7C66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStation.Application", "ServiceStation.Application\ServiceStation.Application.csproj", "{D6FC61C2-3296-47AA-B389-F76519D1F4F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceStation.Application", "ServiceStation.Application\ServiceStation.Application.csproj", "{D6FC61C2-3296-47AA-B389-F76519D1F4F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStation.Infrastructure", "ServiceStation.Infrastructure\ServiceStation.Infrastructure.csproj", "{D7C53621-BC47-4F1B-80EF-8BFDD4129B8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceStation.Infrastructure", "ServiceStation.Infrastructure\ServiceStation.Infrastructure.csproj", "{D7C53621-BC47-4F1B-80EF-8BFDD4129B8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

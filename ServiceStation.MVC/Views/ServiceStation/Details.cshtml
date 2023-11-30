@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>@Model.Name Details</h1>
+<h1>@Model.CarName Details</h1>
 
 <div>
     <h4>CarDto</h4>
@@ -25,6 +25,9 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @if (Model.IsEditable)
+    {
+        <a class="btn btn-primary" asp-controller="ServiceStation" asp-action="Edit" asp-route-LicensePlate="@Model.LicensePlate">Edit</a>
+    }
     <a asp-action="Index">Back to List</a>
 </div>

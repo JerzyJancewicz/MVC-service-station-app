@@ -12,5 +12,8 @@ namespace ServiceStation.Domain.Interfaces
         Task Create(Car car);
         Task<Car?> GetByName(string name);
         Task<IEnumerable<Car>> GetAll();
+        Task Update(Car car);
+        Task<Client?> GetClientById(int Id);
+        Task DeleteCar(string LicensePlate);
     }
 }

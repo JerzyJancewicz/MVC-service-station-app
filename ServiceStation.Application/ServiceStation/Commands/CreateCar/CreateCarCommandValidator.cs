@@ -24,10 +24,11 @@ namespace ServiceStation.Application.ServiceStation.Commands.CreateCar
                         context.AddFailure($"Car with license plate {value} already exists");
                     }
                 });
-            RuleFor(c => c.Name)
+            RuleFor(c => c.CarName)
                 .NotEmpty()
                 .MaximumLength(20);
-
+            RuleFor(c => c.IdClient)
+                .NotEmpty();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ServiceStation.Domain.Entities.Clients;
 using ServiceStation.Domain.Entities.Details;
 using ServiceStation.Domain.Entities.Services;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ServiceStation.Infrastructure.Presistance
 {
-    public class ServiceStationDbContext : DbContext
+    public class ServiceStationDbContext : IdentityDbContext
     {
 
         public ServiceStationDbContext(DbContextOptions<ServiceStationDbContext> options) : base(options) { }
@@ -25,6 +26,8 @@ namespace ServiceStation.Infrastructure.Presistance
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(x => x.Id);
@@ -67,11 +70,12 @@ namespace ServiceStation.Infrastructure.Presistance
 
                 entity.Property(e => e.LicensePlate).ValueGeneratedNever();
                 entity.Property(e => e.LicensePlate).HasMaxLength(255);
-                entity.Property(e => e.Name).HasMaxLength(255);
+                entity.Property(e => e.CarName).HasMaxLength(450);
 
                 entity.HasOne(x => x.IdClientNavigation).WithMany(x => x.Cars)
                     .HasForeignKey(x => x.IdClient)
                     .OnDelete(DeleteBehavior.ClientSetNull);
+                entity.HasOne(x => x.CreatedBy).WithMany().HasForeignKey(x => x.CreatedById);
 
             });
             modelBuilder.Entity<Service>(entity =>

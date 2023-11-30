@@ -1,7 +1,11 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServiceStation.Application.ServiceStation;
 using ServiceStation.Application.ServiceStation.Commands.CreateCar;
+using ServiceStation.Application.ServiceStation.Commands.DeleteCar;
+using ServiceStation.Application.ServiceStation.Commands.UpdateCar;
 using ServiceStation.Application.ServiceStation.Queries.GetAllCar;
 using ServiceStation.Application.ServiceStation.Queries.GetCarByLicansePlate;
 using ServiceStation.Domain.Entities.Clients;
@@ -11,10 +15,12 @@ namespace ServiceStation.MVC.Controllers
     public class ServiceStationController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly IMapper mapper;
 
-        public ServiceStationController(IMediator mediator)
+        public ServiceStationController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
+            this.mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
@@ -24,11 +30,6 @@ namespace ServiceStation.MVC.Controllers
             return View(cars);
         }
 
-        public IActionResult Create() 
-        {
-            return View();
-        }
-
         [Route("Car/{LicensePlate}/Details")]
         public async Task<IActionResult> Details(string LicensePlate)
         {
@@ -36,10 +37,63 @@ namespace ServiceStation.MVC.Controllers
             return View(carDto);
         }
 
+        [Route("Car/{LicensePlate}/Edit")]
+        public async Task<IActionResult> Edit(string LicensePlate)
+        {
+            var carDto = await _mediator.Send(new GetCarByLicensePlateQuery(LicensePlate));
+
+            if (!carDto.IsEditable)
+            {
+                //      Przyjmuje Widok, i kontroler
+                return RedirectToAction("NoAccess", "Home");
+            }
+
+            UpdateCarCommand model = mapper.Map<UpdateCarCommand>(carDto);
+            return View(model);
+        }
+
         [HttpPost]
+        [Route("Car/{LicensePlate}/Edit")]
+        public async Task<IActionResult> Edit(string LicensePlate, UpdateCarCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(command);
+            }
+            await _mediator.Send(command);
+            return RedirectToAction(nameof(Index));
+        }
+        [Authorize]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CreateCarCommand command) 
         {
             if (!ModelState.IsValid) 
+            {
+                return View(command);
+            }
+            await _mediator.Send(command);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [Route("Car/{LicensePlate}/Delete")]
+        public async Task<IActionResult> Delete(string LicensePlate)
+        {
+            var carDto = await _mediator.Send(new GetCarByLicensePlateQuery(LicensePlate));
+            DeleteCarCommand model = mapper.Map<DeleteCarCommand>(carDto);
+            return View(model);
+        }
+
+        [HttpPost]
+        [Route("Car/{LicensePlate}/Delete")]
+        public async Task<IActionResult> Delete(DeleteCarCommand command)
+        {
+            if (!ModelState.IsValid)
             {
                 return View(command);
             }

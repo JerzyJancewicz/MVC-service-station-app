@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.LicensePlate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.CarName)
             </th>
             <th></th>
         </tr>
@@ -28,10 +28,13 @@
                 @Html.DisplayFor(modelItem => item.LicensePlate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.CarName)
             </td>
             <td>
-                <a class="btn btn-primary" asp-controller="ServiceStation" asp-action="Edit" asp-route-LicensePlate="@item.LicensePlate">Edit</a>
+                @if (item.IsEditable)
+                {
+                    <a class="btn btn-primary" asp-controller="ServiceStation" asp-action="Edit" asp-route-LicensePlate="@item.LicensePlate">Edit</a>
+                }
                 <a class="btn btn-primary" asp-controller="ServiceStation" asp-action="Details" asp-route-LicensePlate="@item.LicensePlate">Details</a>
                 <a class="btn btn-primary" asp-controller="ServiceStation" asp-action="Delete" asp-route-LicensePlate="@item.LicensePlate">Delete</a>
             </td>
