@@ -23,6 +23,7 @@ namespace ServiceStation.Infrastructure.Extensions
                 configuration.GetConnectionString("Default")));
 
             services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ServiceStationDbContext>();
 
             services.AddScoped<IServiceStationRepository, ServiceStationRepository>();

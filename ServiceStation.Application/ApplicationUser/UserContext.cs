@@ -38,7 +38,8 @@ namespace ServiceStation.Application.ApplicationUser
 
             var Id = user.FindFirst(e => e.Type == ClaimTypes.NameIdentifier)!.Value;
             var Email = user.FindFirst(e => e.Type == ClaimTypes.Email)!.Value;
-            return new CurrentUser(Email,Id);
+            var roles = user.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value);
+            return new CurrentUser(Email,Id, roles);
         }
     }
 }
