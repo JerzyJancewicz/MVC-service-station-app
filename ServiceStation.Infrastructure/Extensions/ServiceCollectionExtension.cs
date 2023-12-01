@@ -27,6 +27,7 @@ namespace ServiceStation.Infrastructure.Extensions
                 .AddEntityFrameworkStores<ServiceStationDbContext>();
 
             services.AddScoped<IServiceStationRepository, ServiceStationRepository>();
+            services.AddScoped<IClientsRepository, ClientsRepository>();
         }
     }
 }

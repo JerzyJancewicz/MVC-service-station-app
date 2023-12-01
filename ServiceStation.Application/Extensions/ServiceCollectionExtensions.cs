@@ -30,10 +30,12 @@ namespace ServiceStation.Application.Extensions
             }).CreateMapper()
             );
             services.AddAutoMapper(typeof(ServiceStationMappingProfile));
+            services.AddAutoMapper(typeof(ClientMappingProfile));
 
             services.AddValidatorsFromAssemblyContaining<CreateCarCommandValidator>()
                 .AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters();
+
         }
     }
 }
