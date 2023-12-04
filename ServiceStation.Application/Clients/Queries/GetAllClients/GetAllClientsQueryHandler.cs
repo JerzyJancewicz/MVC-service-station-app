@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ServiceStation.Domain.Interfaces;
 using AutoMapper;
+using ServiceStation.Domain.Entities.Clients;
 
 namespace ServiceStation.Application.Clients.Queries.GetAllClients
 {
@@ -25,9 +26,16 @@ namespace ServiceStation.Application.Clients.Queries.GetAllClients
         {
             var clients = await _repository.GetAll();
 
-            var clientsDto = _mapper.Map<IEnumerable<ClientDto>>(clients);
+           /* var clientsDtos = new List<ClientDto>();
+            foreach (var item in clients)
+            {
+                var clientDto = _mapper.Map<ClientDto>(item);
+                clientsDtos.Add(clientDto);
+            }*/
 
-            return clientsDto;   
+            var dtos = _mapper.Map<IEnumerable<ClientDto>>(clients);
+
+            return dtos;   
         }
     }
 }

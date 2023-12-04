@@ -18,7 +18,6 @@ namespace ServiceStation.Infrastructure.Presistance
         public ServiceStationDbContext(DbContextOptions<ServiceStationDbContext> options) : base(options) { }
 
         public DbSet<User> user { get; set; }
-        public DbSet<ContactDetails> contactDetails { get; set; }
         public DbSet<Client> client { get; set; }
         public DbSet<Car> car { get; set; }
         public DbSet<Service> service { get; set; }
@@ -33,34 +32,24 @@ namespace ServiceStation.Infrastructure.Presistance
                 entity.HasKey(x => x.Id);
                 entity.Property(x => x.Id).ValueGeneratedOnAdd();
 
-                entity.HasOne(x => x.IdContactDetailsNavigation).WithMany(x => x.Users)
+                /*entity.HasOne(x => x.IdContactDetailsNavigation).WithMany(x => x.Users)
                     .HasForeignKey(x => x.IdContacDetails)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull);*/
             });
-
-            modelBuilder.Entity<ContactDetails>(entity =>
+            modelBuilder.Entity<Client>(client =>
             {
-                entity.HasKey(x => x.Id);
-                //entity.Property(x => x.Id).ValueGeneratedOnAdd();
+                client.HasKey(x => x.Id);
 
-                entity.Property(x => x.Name).HasMaxLength(255);
-                entity.Property(x => x.Surname).HasMaxLength(255);
-                entity.Property(x => x.Email).HasMaxLength(255);
-                entity.Property(x => x.PhoneNumber).HasMaxLength(255);
-                entity.Property(x => x.Street).HasMaxLength(255);
-                entity.Property(x => x.City).HasMaxLength(255);
-                entity.Property(x => x.PostalCode).HasMaxLength(255);
-            });
-
-            modelBuilder.Entity<Client>(entity =>
-            {
-                entity.HasKey(x => x.Id);
-                //entity.Property(x => x.Id).ValueGeneratedOnAdd();
-
-                entity.HasOne(x => x.IdContactDetailsNavigation).WithMany(x => x.Clients)
-                    .HasForeignKey(x => x.IdContactDetails)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
+                client.OwnsOne(c => c.ContactDetails, contactDetails =>
+                {
+                    contactDetails.Property(cd => cd.Name).HasMaxLength(255);
+                    contactDetails.Property(x => x.Surname).HasMaxLength(255);
+                    contactDetails.Property(x => x.Email).HasMaxLength(255);
+                    contactDetails.Property(x => x.PhoneNumber).HasMaxLength(255);
+                    contactDetails.Property(x => x.Street).HasMaxLength(255);
+                    contactDetails.Property(x => x.City).HasMaxLength(255);
+                    contactDetails.Property(x => x.PostalCode).HasMaxLength(255);
+                });
             });
 
             modelBuilder.Entity<Car>(entity =>
@@ -72,10 +61,10 @@ namespace ServiceStation.Infrastructure.Presistance
                 entity.Property(e => e.LicensePlate).HasMaxLength(255);
                 entity.Property(e => e.CarName).HasMaxLength(450);
 
-                entity.HasOne(x => x.IdClientNavigation).WithMany(x => x.Cars)
+               /* entity.HasOne(x => x.IdClientNavigation).WithMany(x => x.Cars)
                     .HasForeignKey(x => x.IdClient)
                     .OnDelete(DeleteBehavior.ClientSetNull);
-                entity.HasOne(x => x.CreatedBy).WithMany().HasForeignKey(x => x.CreatedById);
+                entity.HasOne(x => x.CreatedBy).WithMany().HasForeignKey(x => x.CreatedById);*/
 
             });
             modelBuilder.Entity<Service>(entity =>
@@ -83,12 +72,12 @@ namespace ServiceStation.Infrastructure.Presistance
                 entity.HasKey(x => x.Id);
                 //entity.Property(x => x.Id).ValueGeneratedOnAdd();
 
-                entity.HasOne(x => x.IdCarNavigation).WithMany(x => x.Services)
+                /*entity.HasOne(x => x.IdCarNavigation).WithMany(x => x.Services)
                     .HasForeignKey(x => x.CarLicensePlate)
                     .OnDelete(DeleteBehavior.ClientSetNull);
                 entity.HasOne(x => x.IdServiceTypeNavigation).WithMany(x => x.Services)
                     .HasForeignKey(x => x.IdServiceType)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull);*/
 
             });
             modelBuilder.Entity<Service_Type>(entity =>

@@ -8,6 +8,7 @@ namespace ServiceStation.Application.Clients
 {
     public class ClientDto
     {
+        public int Id { get; set; }
         public string Name { get; set; } = default!;
         public string Surname { get; set; } = default!;
         public string? PhoneNumber { get; set; }

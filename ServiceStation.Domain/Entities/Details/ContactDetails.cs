@@ -10,7 +10,7 @@ namespace ServiceStation.Domain.Entities.Details
 {
     public class ContactDetails
     {
-        public required int Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; } = default!;
         public string Surname { get; set; } = default!;
         public string? PhoneNumber { get; set; }
@@ -18,7 +18,8 @@ namespace ServiceStation.Domain.Entities.Details
         public string? Street { get; set; }
         public string? City { get; set; }
         public string? PostalCode { get; set; }
-        public virtual ICollection<Client> Clients { get; set; } = new List<Client>();
-        public virtual ICollection<User> Users { get; set; } = new List<User>();
+
+        /*        public virtual ICollection<Client> Clients { get; set; } = new List<Client>();
+       public virtual ICollection<User> Users { get; set; } = new List<User>();*/
     }
 }

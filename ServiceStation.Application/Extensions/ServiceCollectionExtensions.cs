@@ -4,6 +4,8 @@ using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceStation.Application.ApplicationUser;
+using ServiceStation.Application.Clients.Commands.CreateClient;
+using ServiceStation.Application.Clients.Commands.UpdateClient;
 using ServiceStation.Application.Mappings;
 using ServiceStation.Application.ServiceStation.Commands.CreateCar;
 using ServiceStation.Application.ServiceStation.Commands.UpdateCar;
@@ -27,12 +29,20 @@ namespace ServiceStation.Application.Extensions
                 var scoped = provider.CreateScope();
                 var userContext = scoped.ServiceProvider.GetRequiredService<IUserContext>();
                 cfg.AddProfile(new ServiceStationMappingProfile(userContext));
+                cfg.AddProfile(new ClientMappingProfile());
             }).CreateMapper()
             );
-            services.AddAutoMapper(typeof(ServiceStationMappingProfile));
-            services.AddAutoMapper(typeof(ClientMappingProfile));
 
             services.AddValidatorsFromAssemblyContaining<CreateCarCommandValidator>()
+                .AddFluentValidationAutoValidation()
+                .AddFluentValidationClientsideAdapters();
+            services.AddValidatorsFromAssemblyContaining<UpdateCarCommandValidator>()
+                .AddFluentValidationAutoValidation()
+                .AddFluentValidationClientsideAdapters();
+            services.AddValidatorsFromAssemblyContaining<CreateClientCommandValidator>()
+                .AddFluentValidationAutoValidation()
+                .AddFluentValidationClientsideAdapters();
+            services.AddValidatorsFromAssemblyContaining<UpdateClientCommandValidator>()
                 .AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters();
 

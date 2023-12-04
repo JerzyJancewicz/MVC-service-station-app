@@ -28,7 +28,7 @@ namespace ServiceStation.Application.ServiceStation.Commands.CreateCar
             var car = _mapper.Map<Car>(request);
             var currentUser = userContext.GetCurrentUser();
 
-            if (currentUser == null || !currentUser.IsInRole("Owner"))
+            if (currentUser == null || !currentUser.IsInRole("Admin"))
             {
                 return Unit.Value;
             }

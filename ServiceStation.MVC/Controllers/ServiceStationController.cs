@@ -70,7 +70,7 @@ namespace ServiceStation.MVC.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Owner")]
+        [Authorize]
         public async Task<IActionResult> Create(CreateCarCommand command) 
         {
             if (!ModelState.IsValid) 

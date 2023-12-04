@@ -10,7 +10,8 @@ namespace ServiceStation.Domain.Entities.Users
     public class User
     {
         public required int Id { get; set; }
-        public int IdContacDetails { get; set; }
-        public virtual ContactDetails IdContactDetailsNavigation { get; set; } = default!;
+        //public required ContactDetails ContactDetails { get; set; }
+        /*public int IdContacDetails { get; set; }
+        public virtual ContactDetails IdContactDetailsNavigation { get; set; } = default!;*/
     }
 }
