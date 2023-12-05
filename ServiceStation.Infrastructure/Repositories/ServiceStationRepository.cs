@@ -39,6 +39,12 @@ namespace ServiceStation.Infrastructure.Repositories
             return await _serviceStationDbContext.car.ToListAsync();
         }
 
+        public async Task<IEnumerable<Car>> GetAllClientCars(int Id)
+        {
+            var cars = await _serviceStationDbContext.car.Where(e => e.IdClient == Id).ToListAsync();
+            return cars;
+        }
+
         public async Task<Car?> GetByName(string name)
         {
             return await _serviceStationDbContext.car.FirstOrDefaultAsync(e => e.LicensePlate.ToLower() == name.ToLower());

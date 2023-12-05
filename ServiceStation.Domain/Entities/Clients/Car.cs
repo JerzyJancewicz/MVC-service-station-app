@@ -15,9 +15,9 @@ namespace ServiceStation.Domain.Entities.Clients
         public int IdClient { get; set; }
         public string? CreatedById { get; set; }
         public IdentityUser? CreatedBy { get; set; }
-        /*public virtual Client IdClientNavigation { get; set; } = null!;
-        public virtual ICollection<Service> Services { get; set; } = new List<Service>();
-*/
+        public Client? IdClientNavigation { get; set; }
+        //public virtual ICollection<Service> Services { get; set; } = new List<Service>();
+
         public void EncodeLicensePlate() => LicensePlate = LicensePlate.ToUpper().Replace(" ", "");
     }
 }

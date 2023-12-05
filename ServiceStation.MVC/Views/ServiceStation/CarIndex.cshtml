@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ServiceStation.Application.ServiceStation.CarDto>
+@{
+    var Id = 0;
+    if (Model.Any())
+    {
+        Id = Model.ToList()[0].IdClient;
+    }
+    ViewData["Title"] = "CarIndex";
+}
+
+<h1>CarIndex</h1>
+
+<p>
+    <a class="btn btn-primary m-1" asp-controller="ServiceStation" asp-action="Create" asp-route-Id="@Id">Cars</a>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LicensePlate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsEditable)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LicensePlate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsEditable)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

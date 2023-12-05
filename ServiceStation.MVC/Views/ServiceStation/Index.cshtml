@@ -30,13 +30,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CarName)
             </td>
-            <td>
+            <td class="d-flex justify-content-end p-2">
                 @if (item.IsEditable)
                 {
-                    <a class="btn btn-primary" asp-controller="ServiceStation" asp-action="Edit" asp-route-LicensePlate="@item.LicensePlate">Edit</a>
+                    <a class="btn btn-primary m-1" asp-controller="ServiceStation" asp-action="Edit" asp-route-LicensePlate="@item.LicensePlate">Edit</a>
                 }
-                <a class="btn btn-primary" asp-controller="ServiceStation" asp-action="Details" asp-route-LicensePlate="@item.LicensePlate">Details</a>
-                <a class="btn btn-primary" asp-controller="ServiceStation" asp-action="Delete" asp-route-LicensePlate="@item.LicensePlate">Delete</a>
+                <a class="btn btn-primary m-1" asp-controller="ServiceStation" asp-action="Details" asp-route-LicensePlate="@item.LicensePlate">Details</a>
+                <a class="btn btn-danger m-1" asp-controller="ServiceStation" asp-action="Delete" asp-route-LicensePlate="@item.LicensePlate">Delete</a>
             </td>
         </tr>
 }

@@ -22,11 +22,11 @@ namespace ServiceStation.Application.Mappings
         })); ;*/
         public ServiceStationMappingProfile(IUserContext userContext)
         {
-            var user = userContext.GetCurrentUser();
+            //var user = userContext.GetCurrentUser();
 
             CreateMap<CarDto, Car>();
-            CreateMap<Car, CarDto>()
-                .ForMember(dto => dto.IsEditable, opt => opt.MapFrom(src => user !=null &&  src.CreatedById == user.Id));
+            CreateMap<Car, CarDto>();
+                //.ForMember(dto => dto.IsEditable, opt => opt.MapFrom(src => user !=null &&  src.CreatedById == user.Id));
             CreateMap<CarDto, UpdateCarCommand>();
             CreateMap<UpdateCarCommand, CarDto>();
             CreateMap<CarDto, DeleteCarCommand>();

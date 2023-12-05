@@ -7,6 +7,7 @@ using ServiceStation.Application.ServiceStation.Commands.CreateCar;
 using ServiceStation.Application.ServiceStation.Commands.DeleteCar;
 using ServiceStation.Application.ServiceStation.Commands.UpdateCar;
 using ServiceStation.Application.ServiceStation.Queries.GetAllCar;
+using ServiceStation.Application.ServiceStation.Queries.GetAllClientsCar;
 using ServiceStation.Application.ServiceStation.Queries.GetCarByLicansePlate;
 using ServiceStation.Domain.Entities.Clients;
 
@@ -21,6 +22,14 @@ namespace ServiceStation.MVC.Controllers
         {
             _mediator = mediator;
             this.mapper = mapper;
+        }
+
+        [Route("Clients/{Id}/Car")]
+        public async Task<IActionResult> CarIndex(int Id)
+        {
+            var cars = await _mediator.Send(new GetAllClientsCarQuery(Id));
+
+            return View(cars);
         }
 
         public async Task<IActionResult> Index()
@@ -63,20 +72,22 @@ namespace ServiceStation.MVC.Controllers
             await _mediator.Send(command);
             return RedirectToAction(nameof(Index));
         }
-        [Authorize]
+        //[Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> Create(CreateCarCommand command) 
+        //[Authorize]
+        [Route("Clients/{Id}/Car/Create")]
+        public async Task<IActionResult> Create(int Id,CreateCarCommand command) 
         {
             if (!ModelState.IsValid) 
             {
                 return View(command);
             }
+            command.IdClient = Id;
             await _mediator.Send(command);
             return RedirectToAction(nameof(Index));
         }

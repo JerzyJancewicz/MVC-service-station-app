@@ -50,6 +50,10 @@ namespace ServiceStation.Infrastructure.Presistance
                     contactDetails.Property(x => x.City).HasMaxLength(255);
                     contactDetails.Property(x => x.PostalCode).HasMaxLength(255);
                 });
+                client.HasMany(client => client.Cars)
+                    .WithOne(car => car.IdClientNavigation)
+                    .HasForeignKey(car => car.IdClient)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<Car>(entity =>
@@ -61,10 +65,13 @@ namespace ServiceStation.Infrastructure.Presistance
                 entity.Property(e => e.LicensePlate).HasMaxLength(255);
                 entity.Property(e => e.CarName).HasMaxLength(450);
 
-               /* entity.HasOne(x => x.IdClientNavigation).WithMany(x => x.Cars)
-                    .HasForeignKey(x => x.IdClient)
+                entity.HasOne(car => car.IdClientNavigation)
+                    .WithMany(client => client.Cars)
+                    .HasForeignKey(car => car.IdClient)
                     .OnDelete(DeleteBehavior.ClientSetNull);
-                entity.HasOne(x => x.CreatedBy).WithMany().HasForeignKey(x => x.CreatedById);*/
+                entity.HasOne(car => car.CreatedBy)
+                    .WithMany()
+                    .HasForeignKey(car => car.CreatedById);
 
             });
             modelBuilder.Entity<Service>(entity =>

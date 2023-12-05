@@ -26,16 +26,16 @@ namespace ServiceStation.Application.ServiceStation.Commands.CreateCar
         public async Task<Unit> Handle(CreateCarCommand request, CancellationToken cancellationToken)
         {
             var car = _mapper.Map<Car>(request);
-            var currentUser = userContext.GetCurrentUser();
+            //var currentUser = userContext.GetCurrentUser();
 
-            if (currentUser == null || !currentUser.IsInRole("Admin"))
+            /*if (currentUser == null || !currentUser.IsInRole("Admin"))
             {
                 return Unit.Value;
-            }
+            }*/
 
             car.EncodeLicensePlate();
 
-            car.CreatedById = currentUser.Id;
+            //CreatedById = currentUser.Id;
 
             await _repository.Create(car);
 

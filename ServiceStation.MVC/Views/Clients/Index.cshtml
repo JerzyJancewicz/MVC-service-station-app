@@ -21,6 +21,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.PhoneNumber)
             </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -35,10 +36,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
-            <td>
-                <a class="btn btn-primary" asp-controller="Clients" asp-action="Edit" asp-route-Id="@item.Id">Edit</a>
-                <a class="btn btn-primary" asp-controller="Clients" asp-action="Details" asp-route-Id="@item.Id">Details</a>
-                <a class="btn btn-danger" asp-controller="Clients" asp-action="Delete" asp-route-Id="@item.Id">Delete</a>
+            <td class="p-2">
+                <a class="btn btn-primary m-1" asp-controller="ServiceStation" asp-action="CarIndex" asp-route-Id="@item.Id">Cars</a>
+            </td>
+            <td class="d-flex justify-content-end p-2">
+                <a class="btn btn-primary m-1" asp-controller="Clients" asp-action="Edit" asp-route-Id="@item.Id">Edit</a>
+                <a class="btn btn-primary m-1" asp-controller="Clients" asp-action="Details" asp-route-Id="@item.Id">Details</a>
+                <a class="btn btn-danger m-1" asp-controller="Clients" asp-action="Delete" asp-route-Id="@item.Id">Delete</a>
             </td>
         </tr>
 }
