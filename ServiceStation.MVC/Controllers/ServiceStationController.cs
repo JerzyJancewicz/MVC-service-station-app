@@ -27,6 +27,7 @@ namespace ServiceStation.MVC.Controllers
         [Route("Clients/{Id}/Car")]
         public async Task<IActionResult> CarIndex(int Id)
         {
+            //ViewBag.IdClient = Id;
             var cars = await _mediator.Send(new GetAllClientsCarQuery(Id));
 
             return View(cars);
@@ -73,23 +74,27 @@ namespace ServiceStation.MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
         //[Authorize]
-        public IActionResult Create()
+        public IActionResult Create(int Id)
         {
+            ViewBag.ClientId = Id;
             return View();
         }
 
         [HttpPost]
         //[Authorize]
-        [Route("Clients/{Id}/Car/Create")]
+        [Route("ServiceStation/Create/{Id}")]
         public async Task<IActionResult> Create(int Id,CreateCarCommand command) 
         {
+            command.IdClient = Id;
+
             if (!ModelState.IsValid) 
             {
+                ViewBag.ClientId = Id;
                 return View(command);
             }
-            command.IdClient = Id;
             await _mediator.Send(command);
-            return RedirectToAction(nameof(Index));
+            ViewBag.ClientId = Id;
+            return RedirectToAction("CarIndex", "ServiceStation", new { Id = ViewBag.ClientId });
         }
 
         [Route("Car/{LicensePlate}/Delete")]

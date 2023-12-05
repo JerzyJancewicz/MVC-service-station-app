@@ -1,18 +1,17 @@
 ﻿@model IEnumerable<ServiceStation.Application.ServiceStation.CarDto>
 @{
-    var Id = 0;
-    if (Model.Any())
-    {
-        Id = Model.ToList()[0].IdClient;
-    }
+    var defaultClientId = 1;
+    var IdClient = int.TryParse(ViewContext.RouteData.Values["Id"]?.ToString(), out var parsedId)
+        ? parsedId
+        : defaultClientId;
     ViewData["Title"] = "CarIndex";
 }
 
-<h1>CarIndex</h1>
+<h1>Car List</h1>
 
 <p>
-    <a class="btn btn-primary m-1" asp-controller="ServiceStation" asp-action="Create" asp-route-Id="@Id">Cars</a>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="Create" asp-route-Id="@IdClient">Create New</a>
+    <a class="btn btn-primary" asp-action="Index" asp-controller="Clients">Back to List</a>
 </p>
 <table class="table">
     <thead>
