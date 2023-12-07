@@ -4,9 +4,9 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1 class="m-1">Edit</h1>
 
-<h4>CarDto</h4>
+<h4 class="m-1">@Model.CarName</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,16 +14,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="LicensePlate" />
             <div class="form-group">
-                <label asp-for="CarName" class="control-label"></label>
-                <input asp-for="CarName" class="form-control" />
+                <label asp-for="CarName" class="control-label m-1"></label>
+                <input asp-for="CarName" class="form-control m-1" />
                 <span asp-validation-for="CarName" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                <label asp-for="IdClient" class="control-label"></label>
-                <input asp-for="IdClient" class="form-control" />
-                <span asp-validation-for="IdClient" class="text-danger"></span>
-            </div>*@
-            <div class="form-group">
+            <div class="form-group m-1">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -31,7 +26,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-primary m-1" asp-action="CarIndex" asp-controller="ServiceStation" asp-route-Id="@Model.IdClient">Back to List</a>
 </div>
 
 @section Scripts {

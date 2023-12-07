@@ -7,7 +7,7 @@
     ViewData["Title"] = "CarIndex";
 }
 
-<h1>Car List</h1>
+<h1> Car List</h1>
 
 <p>
     <a class="btn btn-primary" asp-action="Create" asp-route-Id="@IdClient">Create New</a>
@@ -41,9 +41,9 @@
                 @Html.DisplayFor(modelItem => item.IsEditable)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <a class="btn btn-primary m-1" asp-controller="ServiceStation" asp-action="Edit" asp-route-LicensePlate="@item.LicensePlate">Edit</a>
+                <a class="btn btn-primary m-1" asp-controller="ServiceStation" asp-action="Details" asp-route-LicensePlate="@item.LicensePlate">Details</a>
+                <a class="btn btn-danger m-1" asp-controller="ServiceStation" asp-action="Delete" asp-route-LicensePlate="@item.LicensePlate">Delete</a>
             </td>
         </tr>
 }

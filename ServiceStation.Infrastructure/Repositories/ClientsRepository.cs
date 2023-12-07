@@ -55,8 +55,17 @@ namespace ServiceStation.Infrastructure.Repositories
         public async Task DeleteClient(int Id)
         {
             var client = await _dbContext.client.FirstOrDefaultAsync(e => e.Id == Id);
+            var cars = await _dbContext.car.Where(x => x.IdClient == Id).ToListAsync();
+
             if (client != null)
             {
+                if (cars != null) 
+                {
+                    foreach (var car in cars)
+                    {
+                        _dbContext.car.Remove(car);
+                    }
+                }
                 _dbContext.client.Remove(client);
                 await _dbContext.SaveChangesAsync();
             }

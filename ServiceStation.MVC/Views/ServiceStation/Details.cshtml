@@ -23,5 +23,5 @@
     {
         <a class="btn btn-primary" asp-controller="ServiceStation" asp-action="Edit" asp-route-LicensePlate="@Model.LicensePlate">Edit</a>
     }
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-primary" asp-action="CarIndex" asp-controller="ServiceStation" asp-route-Id="@Model.IdClient">Back to List</a>
 </div>

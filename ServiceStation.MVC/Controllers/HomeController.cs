@@ -18,24 +18,9 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
     public IActionResult NoAccess()
     {
         return View();
-    }
-
-    public IActionResult About() 
-    {
-        var model = new About()
-        {
-            Title = "Cos",
-            Description = "COS2"
-        };
-        return View(model);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

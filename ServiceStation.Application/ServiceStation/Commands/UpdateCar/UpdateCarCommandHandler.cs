@@ -25,14 +25,14 @@ namespace ServiceStation.Application.ServiceStation.Commands.UpdateCar
         }
         public async Task<Unit> Handle(UpdateCarCommand request, CancellationToken cancellationToken)
         {
-            var currentCar = await repository.GetByName(request.CarName);
-            var user = userContext.GetCurrentUser();
-            var isEditable = user != null || currentCar?.CreatedById == user?.Id;
+            //var currentCar = await repository.GetByName(request.CarName);
+            //var user = userContext.GetCurrentUser();
+            /*var isEditable = user != null || currentCar?.CreatedById == user?.Id;
 
             if (!isEditable)
             {
                 return Unit.Value;
-            }
+            }*/
 
             var car = mapper.Map<Car>(request);
             await repository.Update(car);

@@ -18,10 +18,12 @@ namespace ServiceStation.Application.ServiceStation.Commands.CreateCar
                 .MaximumLength(10)
                 .Custom((value, context) =>
                 {
-                    var existingCar = repository.GetByName(value).Result;
+                    var encodeValue = value.ToUpper().Replace(" ", "");
+                    var existingCar = repository.GetByName(encodeValue).Result;
+
                     if (existingCar != null)
                     {
-                        context.AddFailure($"Car with license plate {value} already exists");
+                        context.AddFailure($"Car with license plate {encodeValue} already exists");
                     }
                 });
             RuleFor(c => c.CarName)
