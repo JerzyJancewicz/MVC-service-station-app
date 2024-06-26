@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-The application "Service Station App" provides comprehensive visibility into clients and their associated vehicles, with authentication and authorization features ensuring secure access for users.
+The application "Service Station App" provides comprehensive visibility into clients and their associated vehicles, with authentication and authorization features ensuring secure access for users. All of the data 
 ## Features
 
 - **Full CRUD Operations:** Users can create, read, update, and delete projects.
@@ -21,9 +21,11 @@ The application "Service Station App" provides comprehensive visibility into cli
 ![Register](photos/Edit.png)
 
 ## Technologies
-
+## Languages
+- C# .NET
+- Razor Syntax
 ### MVC
 - CQRS 
-
+- Entity Framework Core
 ### DB-Engine:
 - MsSQL
